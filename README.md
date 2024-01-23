@@ -46,5 +46,6 @@ Allowed the user to sort the data from the database.
 Ensured that error handling is in place for both your application and any API requests. Gave users any user-relevant errors.
 
 
-How to start your server: commands are needed to run my code: npm i  and then nodemon index.js, also make sure to use port 3000!
+
+### How to start your server: commands are needed to run my code: npm i  and then nodemon index.js, also make sure to use port 3000!
 
