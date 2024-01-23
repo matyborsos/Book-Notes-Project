@@ -1,0 +1,78 @@
+<%- include("partials/header.ejs"); %>
+
+    <main id="reviews">
+        <h1 class="display-4 py-5">Book Notes/Reviews:</h1>
+
+        <div class="container-buttons-2">
+            <h3>Order by:</h3>
+            <form action="/rating" method="get">
+                <button type="submit" class="btn btn-light rounded-pill px-3" >Rating</button>
+            </form>
+            <form action="/recency-r" method="get">
+                <button type="submit" class="btn btn-light rounded-pill px-3">Most recent review</button>
+            </form>
+            <form action="/recency-p" method="get">
+                <button type="submit" class="btn btn-light rounded-pill px-3">Most recent published date</button>
+            </form>
+        </div>
+
+        <br />
+        <br />
+        <% for(let item of listItems) {%>
+        <div class="row mb-3 px-5 ">
+            <div class="col-md-11 px-5 mx-5 ">
+              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static post">
+                  <strong class="d-inline-block mb-2 text-primary-emphasis"><%= item.categories %></strong>
+                  <h3 class="mb-0"><%= item.title %> by <%=item.author%></h3>
+
+                  <div class="container-buttons">
+                    <form action="/new" method="get">
+                        <button type="submit" name="updatedItemId" value="<%= item.id %>" class="btn btn-dark rounded-pill px-3" styele="background-color: #052c65"><img class="icon item" src="/assets/icons/pencil-solid.svg" alt="pencil image" ></button>
+                    </form>
+                    <form action="/delete" method="post">
+                        <button type="submit" name="deleteItemId" value="<%= item.id %>" class="btn btn-dark rounded-pill px-3" styele="color: #052c65"><img class="icon item" src="/assets/icons/bin.svg" alt="bin" ></button>
+                    </form>
+                  </div>
+                  <hr />
+                  <div class="mb-1 text-body-secondary"><%= item.date %></div>
+                  <div class="mb-1 text-body-secondary">Score: <%= item.score %>/10</div>
+                  <br />
+                  <p class="card-text mb-auto"><%= item.description%></p>
+                  <br />
+                  <hr />
+                  <a id="edit<%=item.id%>" onclick="handler('<%=item.id%>')" class="icon-link gap-1 icon-link-hover stretched-link" style="text-decoration-color: #052c65; color: #052c65;">
+                    Find out more!
+                    <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                  </a>
+                    <h5 id="text-1<%=item.id%>" hidden>More details about the book:</h5>
+                        <div id="text-2<%=item.id%>" class="mb-1 text-body-secondary" hidden>Release date: <%= item.publisheddate || "unknown - please add one by editing this post!"%></div>
+                        <div id="text-3<%=item.id%>" class="mb-1 text-body-secondary" hidden>Page count: <%= item.pagecount %></div>
+                    <br />
+                    <h5 id="text-4<%=item.id%>" hidden>
+                       Review:
+                    </h5>
+                    <p id="text-5<%=item.id%>" hidden> <%= item.review%> </p>
+                </div>
+                <div class="col-auto d-flex py-5 px-5 image post">
+                  <img class="bd-placeholder-img" style="max-height: 400px; min-width: 200px" src="<%= item.imagesrc %>">
+                </div>
+              </div>
+            </div>
+        </div>
+        <% } %>
+    </main>
+
+    <script>
+        function handler(id) {
+            document.getElementById("edit" + id).setAttribute("hidden", true)
+            document.getElementById("text-1" + id).removeAttribute("hidden")
+            document.getElementById("text-2" + id).removeAttribute("hidden")
+            document.getElementById("text-3" + id).removeAttribute("hidden")
+            document.getElementById("text-4" + id).removeAttribute("hidden")
+            document.getElementById("text-5" + id).removeAttribute("hidden")
+
+        }
+      </script>
+
+<%- include("partials/footer.ejs"); %>

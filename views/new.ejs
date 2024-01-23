@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Add a review</title>
+</head>
+<body >
+    <main >
+        <% if(locals.listItems) { %>
+                <div class=" px-5 mx-5" >
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250">
+                        <div class="col p-4 d-flex flex-column">
+                            <form method="post" action="/edit" >
+                                <input type="text" class="form-control" name="categories" value="<%= listItems[0].categories %>">
+                                <br />
+                                <div style="display: flex; flex-direction: row; gap: 20px; align-items: center;">
+                                    <input type="text" id="title" class="form-control"  name="title" value="<%= listItems[0].title %>">
+                                    <h5> by </h5>
+                                    <input type="text" id="title" class="form-control"  name="author" value="<%=listItems[0].author%>">
+                                </div>
+                                <hr />
+                                <label>Please delete everything after the year, before submitting!</label>
+                                <input type="text" class="form-control" name="date" value="<%= listItems[0].date %>">
+                                <input type="number" class="form-control" name="score" value="<%= listItems[0].score %>">
+                                <br />
+                                <input type="text" class="form-control" name="description" cols="100" value="<%= listItems[0].description%>">
+                                <br />
+                                <hr />
+                                <label>Please delete everything after the year, before submitting!</label>
+                                <input type="text" class="form-control" name="publisheddate" value="<%= listItems[0].publisheddate %>">
+                                <input type="number" class="form-control" name="pagecount" value="<%= listItems[0].pagecount%>">
+                                <br />
+                                <h5 >
+                                Review:
+                                </h5>
+                                <input type="text" class="form-control" name="review" value="<%= listItems[0].review%>">
+                                <br />
+                                <button type="submit" class="btn btn-primary">Save Review</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        <% } else { %>
+            <form class="container-f" method="post" action="/add">
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="title">Book Title:</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="author">Author's Name:</label>
+                    <input type="text" class="form-control" id="author" name="author">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="score">Score:</label>
+                    <input type="number" class="form-control" id="score" name="score">
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="review">Review:</label>
+                <input type="text" class="form-control" id="review" rows="5" name="review">
+                </div>
+                <hr />
+                <button type="submit" class="btn btn-primary">Make Review</button>
+            </form>
+        <% } %>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+</body>
+</html>
